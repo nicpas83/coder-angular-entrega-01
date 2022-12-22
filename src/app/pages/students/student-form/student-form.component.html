@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>{{ data.title }}</h2>
+
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <mat-dialog-content>
+
+        <!-- Form Row-->
+        <div class="row gx-3 mb-3">
+            <div class="col-md-4">
+                <label class="small mb-1">Nombre</label>
+                <input formControlName="nombre" class="form-control" type="text" />
+                <div *ngIf="nombre?.touched && nombre?.errors?.['required']" class="text-xs text-danger">* El campo
+                    Nombre es requerido</div>
+                <div *ngIf="nombre?.touched && nombre?.errors?.['minlength']" class="text-xs text-danger">* El campo
+                    Nombre debe tener al menos 3 caracteres</div>
+            </div>
+            <div class="col-md-4">
+                <label class="small mb-1">Apellido</label>
+                <input formControlName="apellido" class="form-control" type="text" />
+                <div *ngIf="apellido?.touched && apellido?.errors?.['required']" class="text-xs text-danger">* El campo
+                    Apellido es requerido</div>
+                <div *ngIf="apellido?.touched && apellido?.errors?.['minlenght']" class="text-xs text-danger">* El campo
+                    Apellido debe tener al menos 3 caracteres</div>
+            </div>
+            <div class="col-md-4">
+                <label class="small mb-1">Calificación</label>
+                <input formControlName="calificacion" class="form-control" type="number" />
+                <div *ngIf="calificacion?.touched && apellido?.errors?.['required']" class="text-xs text-danger">* El
+                    campo Calificación es requerido</div>
+            </div>
+        </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close>Cancelar</button>
+        <button mat-button cdkFocusInitial>Guardar</button>
+    </mat-dialog-actions>
+</form>

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { StudentFormComponent } from './pages/student-form/student-form.component';
 import { HomeComponent } from './pages/home/home.component';
-import { StudentsComponent } from './pages/students/students.component';
+import { StudentFormComponent } from './pages/students/student-form/student-form.component';
+import { StudentsIndexComponent } from './pages/students/students-index/students-index.component';
 
 const routes: Routes = [
   {
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'alumnos',
-    component: StudentsComponent,
+    component: StudentsIndexComponent,
     
   },
   {

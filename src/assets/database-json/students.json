@@ -1,0 +1,62 @@
+[
+    {
+        "id": 1,
+        "nombre": "Juan",
+        "apellido": "Pérez",
+        "calificacion": 4
+    },
+    {
+        "id": 2,
+        "nombre": "María",
+        "apellido": "Rodríguez",
+        "calificacion": 9
+    },
+    {
+        "id": 3,
+        "nombre": "Pedro",
+        "apellido": "González",
+        "calificacion": 7
+    },
+    {
+        "id": 4,
+        "nombre": "Ana",
+        "apellido": "Martínez",
+        "calificacion": 6
+    },
+    {
+        "id": 5,
+        "nombre": "Sandra",
+        "apellido": "Sánchez",
+        "calificacion": 8
+    },
+    {
+        "id": 6,
+        "nombre": "Pablo",
+        "apellido": "Díaz",
+        "calificacion": 10
+    },
+    {
+        "id": 7,
+        "nombre": "Laura",
+        "apellido": "García",
+        "calificacion": 9
+    },
+    {
+        "id": 8,
+        "nombre": "Roberto",
+        "apellido": "Fernández",
+        "calificacion": 7
+    },
+    {
+        "id": 9,
+        "nombre": "Andrea",
+        "apellido": "López",
+        "calificacion": 5
+    },
+    {
+        "id": 10,
+        "nombre": "Pamela",
+        "apellido": "Ruiz",
+        "calificacion": 6
+    }
+]
