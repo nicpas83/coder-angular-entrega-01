@@ -28,9 +28,7 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
     this.coursesService
       .getCourses()
       .then((response: Course[]) => {
-        this.dataSource = new MatTableDataSource(response.map((course: Course) => {
-          return { id: course.id, nombre: course.nombre.toUpperCase() };
-        }));
+        this.dataSource = new MatTableDataSource(response.map( (course: Course) => ({...course, nombre: course.nombre.toUpperCase()}) ));
       })
       .catch((error) => {
         console.log(error);

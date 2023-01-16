@@ -2,61 +2,51 @@
     {
         "id": 1,
         "nombre": "Juan",
-        "apellido": "Pérez",
-        "calificacion": 4
+        "apellido": "Pérez"
     },
     {
         "id": 2,
         "nombre": "María",
-        "apellido": "Rodríguez",
-        "calificacion": 9
+        "apellido": "Rodríguez"
     },
     {
         "id": 3,
         "nombre": "Pedro",
-        "apellido": "González",
-        "calificacion": 7
+        "apellido": "González"
     },
     {
         "id": 4,
         "nombre": "Ana",
-        "apellido": "Martínez",
-        "calificacion": 6
+        "apellido": "Martínez"
     },
     {
         "id": 5,
         "nombre": "Sandra",
-        "apellido": "Sánchez",
-        "calificacion": 8
+        "apellido": "Sánchez"
     },
     {
         "id": 6,
         "nombre": "Pablo",
-        "apellido": "Díaz",
-        "calificacion": 10
+        "apellido": "Díaz"
     },
     {
         "id": 7,
         "nombre": "Laura",
-        "apellido": "García",
-        "calificacion": 9
+        "apellido": "García"
     },
     {
         "id": 8,
         "nombre": "Roberto",
-        "apellido": "Fernández",
-        "calificacion": 7
+        "apellido": "Fernández"
     },
     {
         "id": 9,
         "nombre": "Andrea",
-        "apellido": "López",
-        "calificacion": 5
+        "apellido": "López"
     },
     {
         "id": 10,
         "nombre": "Pamela",
-        "apellido": "Ruiz",
-        "calificacion": 6
+        "apellido": "Ruiz"
     }
 ]

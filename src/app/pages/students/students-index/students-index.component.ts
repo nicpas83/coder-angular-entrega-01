@@ -18,9 +18,9 @@ export class StudentsIndexComponent implements OnInit {
   // @ViewChild(MatTable) studentsTable!: MatTable<any>;
 
   public students: Student[] = [];
-  public displayedColumns: string[] = ['id','nombre', 'apellido', 'calificacion', 'estado', 'acciones'];
+  public displayedColumns: string[] = ['id','nombre', 'apellido', 'acciones'];
   public dataSource = new MatTableDataSource<Student>();
-  
+
   constructor(
     private studentsService: StudentsService,
     public dialog: MatDialog
@@ -28,9 +28,9 @@ export class StudentsIndexComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Obtengo listado de alumnos 
+    // Obtengo listado de alumnos
     this.studentsService.getAll().subscribe({
-      next: (resp) => {        
+      next: (resp) => {
         this.dataSource = new MatTableDataSource<Student>(resp);
         console.log(this.dataSource.data)
       },
@@ -45,7 +45,7 @@ export class StudentsIndexComponent implements OnInit {
   openDialogStudentForm(id?: number) {
     const dialogTitle = id ? 'Editar Alumno' : 'Agregar Alumno';
     let studentEditData: Student | undefined;
-    
+
     if(id){
       studentEditData = this.dataSource.filteredData.find( item => item.id === id )
     }
@@ -60,7 +60,6 @@ export class StudentsIndexComponent implements OnInit {
 
     // luego de cerrar actualizo informacion en la tabla
     dialogRef.afterClosed().subscribe( data => {
-
       if(data){
         if(id){
           //editar
@@ -69,9 +68,9 @@ export class StudentsIndexComponent implements OnInit {
 
           if(index !== -1){
             this.dataSource.filteredData.splice(index, 1, data);
-            this.dataSource._updateChangeSubscription(); 
+            this.dataSource._updateChangeSubscription();
           }
-          
+
         }else{
           //crear
           data.id = this.studentsService.getMaxId(this.dataSource.data) + 1;
@@ -79,23 +78,19 @@ export class StudentsIndexComponent implements OnInit {
 
           //actualizar el datasource
           this.dataSource.data.push(newStudent);
-          this.dataSource._updateChangeSubscription(); 
+          this.dataSource._updateChangeSubscription();
         }
       }
     });
-
   }
 
-  
+
   deleteStudent(id: number){
     const index = this.dataSource.filteredData.findIndex( item => item.id === id )
 
-    console.log(id)
-    console.log(index)
     if(index !== -1){
       this.dataSource.filteredData.splice(index, 1)
-      this.dataSource._updateChangeSubscription(); 
-
+      this.dataSource._updateChangeSubscription();
     }
   }
 

@@ -22,7 +22,7 @@ export class CoursesService {
         } else {
           reject();
         }
-      }, 1000);
+      }, 100);
     });
   }
 }
