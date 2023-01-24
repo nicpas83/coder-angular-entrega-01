@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Student } from 'src/app/interfaces/student.interface';
 import { StudentsService } from 'src/app/services/students.service';
 
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 
 import { MatDialog, MAT_DIALOG_DATA  } from '@angular/material/dialog';
 import { StudentFormComponent } from '../student-form/student-form.component';
@@ -20,7 +20,7 @@ export class StudentsIndexComponent implements OnInit {
   public students: Student[] = [];
   public displayedColumns: string[] = ['id','nombre', 'apellido', 'calificacion', 'estado', 'acciones'];
   public dataSource = new MatTableDataSource<Student>();
-  
+
   constructor(
     private studentsService: StudentsService,
     public dialog: MatDialog
@@ -28,9 +28,9 @@ export class StudentsIndexComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Obtengo listado de alumnos 
+    // Obtengo listado de alumnos
     this.studentsService.getAll().subscribe({
-      next: (resp) => {        
+      next: (resp) => {
         this.dataSource = new MatTableDataSource<Student>(resp);
         console.log(this.dataSource.data)
       },
@@ -45,7 +45,7 @@ export class StudentsIndexComponent implements OnInit {
   openDialogStudentForm(id?: number) {
     const dialogTitle = id ? 'Editar Alumno' : 'Agregar Alumno';
     let studentEditData: Student | undefined;
-    
+
     if(id){
       studentEditData = this.dataSource.filteredData.find( item => item.id === id )
     }
@@ -69,9 +69,9 @@ export class StudentsIndexComponent implements OnInit {
 
           if(index !== -1){
             this.dataSource.filteredData.splice(index, 1, data);
-            this.dataSource._updateChangeSubscription(); 
+            this.dataSource._updateChangeSubscription();
           }
-          
+
         }else{
           //crear
           data.id = this.studentsService.getMaxId(this.dataSource.data) + 1;
@@ -79,14 +79,14 @@ export class StudentsIndexComponent implements OnInit {
 
           //actualizar el datasource
           this.dataSource.data.push(newStudent);
-          this.dataSource._updateChangeSubscription(); 
+          this.dataSource._updateChangeSubscription();
         }
       }
     });
 
   }
 
-  
+
   deleteStudent(id: number){
     const index = this.dataSource.filteredData.findIndex( item => item.id === id )
 
@@ -94,7 +94,7 @@ export class StudentsIndexComponent implements OnInit {
     console.log(index)
     if(index !== -1){
       this.dataSource.filteredData.splice(index, 1)
-      this.dataSource._updateChangeSubscription(); 
+      this.dataSource._updateChangeSubscription();
 
     }
   }

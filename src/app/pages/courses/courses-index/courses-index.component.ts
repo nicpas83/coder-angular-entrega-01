@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+
+// MATERIAL
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
+
+
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 import { Course } from 'src/app/interfaces/courses.interface';
 import { CoursesService } from 'src/app/services/courses.service';
@@ -11,8 +16,9 @@ import { CoursesService } from 'src/app/services/courses.service';
   styleUrls: ['./courses-index.component.css'],
 })
 export class CoursesIndexComponent implements OnInit, OnDestroy {
+
   public displayedColumns: string[] = ['id', 'nombre'];
-  public dataSource = new MatTableDataSource<Course>();
+  dataSource = new MatTableDataSource<Course>();
 
   //observable para buscador de cursos
   search$ = new Subject<string>();
@@ -28,9 +34,11 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
     this.coursesService
       .getCourses()
       .then((response: Course[]) => {
-        this.dataSource = new MatTableDataSource(response.map((course: Course) => {
-          return { id: course.id, nombre: course.nombre.toUpperCase() };
-        }));
+        console.log(response)
+        this.dataSource = new MatTableDataSource<Course>(response.map((course: Course) => {
+          return {...course}
+        }))
+
       })
       .catch((error) => {
         console.log(error);
