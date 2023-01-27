@@ -18,11 +18,10 @@ export class StudentFormComponent implements OnInit {
   });
 
   constructor(
-    private studentsService: StudentsService,
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<StudentFormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-    
+
   ) { }
 
   //getters para facilitar la validación en la vistac
@@ -34,7 +33,7 @@ export class StudentFormComponent implements OnInit {
 
     //si existe studentData, actualizo valores del formulario.
     if(this.data.student){
-      this.studentForm.patchValue(this.data.student)        
+      this.studentForm.patchValue(this.data.student)
     }
     console.log(this.data)
   }

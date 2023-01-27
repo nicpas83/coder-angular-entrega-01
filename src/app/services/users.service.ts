@@ -1,8 +1,9 @@
+import { IUser } from './../auth/interfaces/api-reqres.interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/user.interface';
+
 
 const base_url = environment.base_url;
 
@@ -15,7 +16,7 @@ export class UsersService {
     private readonly http: HttpClient
   ) { }
 
-  getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(base_url + 'users')
+  getUsers(): Observable<IUser[]>{
+    return this.http.get<IUser[]>(base_url + 'users')
   }
 }

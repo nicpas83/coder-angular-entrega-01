@@ -1,5 +1,6 @@
+import { IUser } from './../../../auth/interfaces/api-reqres.interfaces';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/interfaces/user.interface';
+
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class UsersIndexComponent implements OnInit {
 
-  public users: User[] = [];
+  public users: IUser[] = [];
 
   public displayedColumns = ['id', 'name', 'email', 'avatar'];
 
@@ -23,9 +24,9 @@ export class UsersIndexComponent implements OnInit {
 
   getusers(){
     this.usersService.getUsers().subscribe({
-      next: (resp: User[]) => {
+      next: (resp: IUser[]) => {
         this.users = resp;
-        console.log(this.users)
+        // console.log(this.users)
       }
     });
 

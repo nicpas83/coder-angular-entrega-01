@@ -12,10 +12,16 @@
                               <form [formGroup]="loginForm" (ngSubmit)="login()">
                                   <!-- Form Group (email address)-->
                                   <div class="mb-3">
-                                      <label class="small mb-1" for="inputEmailAddress">Nombre de Usuario</label>
-                                      <input class="form-control" formControlName="username" />
-                                      <small *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched" class="text-danger">El nombre de usuario es requerido y debe tener al menos 6 caracteres.</small>
+                                      <label class="small mb-1" for="inputEmailAddress">E-mail</label>
+                                      <input type="email" class="form-control" formControlName="email" placeholder="Ingrese cualquier nombre de usuario"/>
+                                      <small *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger">El campo email es requerido y debe tener al menos 6 caracteres.</small>
                                   </div>
+                                  <!-- Form Group (password)-->
+                                  <div class="mb-3">
+                                    <label class="small mb-1" for="inputEmailAddress">Contraseña</label>
+                                    <input type="password" class="form-control" formControlName="password" placeholder="Ingrese cualquier nombre de usuario"/>
+                                    <small *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger">La campo contraseña es requerido.</small>
+                                </div>
                                   <!-- Form Group (password)-->
                                   <div class="mb-3">
                                       <label class="small mb-1" for="inputPassword">Rol</label>
@@ -28,7 +34,7 @@
 
                                   <!-- Form Group (login box)-->
                                   <div class="d-flex align-items-end justify-content-end mt-4 mb-0">
-                                      <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary">Login</button>
+                                      <button [disabled]="loginForm.invalid || loading" type="submit" class="btn btn-primary">Login</button>
                                   </div>
                               </form>
                           </div>

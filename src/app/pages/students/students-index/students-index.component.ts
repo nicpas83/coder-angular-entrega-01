@@ -5,7 +5,7 @@ import { StudentsService } from 'src/app/services/students.service';
 
 import { MatTableDataSource } from '@angular/material/table';
 
-import { MatDialog, MAT_DIALOG_DATA  } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { StudentFormComponent } from '../student-form/student-form.component';
 
 @Component({

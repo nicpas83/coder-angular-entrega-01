@@ -1,7 +1,12 @@
-import { AuthService } from './../auth.service';
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  FormGroup,
+  FormBuilder,
+  Validators,
+  FormControl,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +17,20 @@ export class LoginComponent {
   rolTypes: string[] = [];
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  loading: boolean = false;
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required, Validators.minLength(6)]],
+      email: ['eve.holt@reqres.in', [Validators.required, Validators.email]],
+      password: ['cityslicka', [Validators.required]],
       rol: ['', [Validators.required]],
     });
-    this.rolTypes = this.authService.getRoles()
+
+    this.rolTypes = this.authService.getRoles();
   }
 
   login() {
@@ -25,15 +38,16 @@ export class LoginComponent {
       return;
     }
 
-    this.authService.login(this.loginForm.value).subscribe({
-      next: (resp) => {
-        this.router.navigate([''])
+    this.loading = true;
 
+    this.authService.login(this.loginForm.value).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['']);
       },
       error: (error) => {
-        console.log(error)
-      }
-    })
-
+        console.log(error);
+      },
+    });
   }
 }
