@@ -11,7 +11,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class AuthService {
 
-  private api_auth_url = environment.api_auth_url;
+  api_auth_url = environment.api_auth_url;
   rolTypes: string[] = ['Alumno', 'Administrador']
 
   private user = new BehaviorSubject<User | null>(null);
