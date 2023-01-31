@@ -12,6 +12,10 @@ import { MatTableModule } from '@angular/material/table';
 
 import { StudentsIndexComponent } from './students-index/students-index.component';
 import { StudentFormComponent } from './student-form/student-form.component';
+import { StudentEditComponent } from './student-edit/student-edit.component';
+import { CourseSelectDialogComponent } from './course-select-dialog/course-select-dialog.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
   {
@@ -19,8 +23,8 @@ const routes: Routes = [
     component: StudentsIndexComponent
   },
   {
-    path: 'agregar',
-    component: StudentFormComponent
+    path: 'editar/:id',
+    component: StudentEditComponent
   },
 ]
 
@@ -30,6 +34,8 @@ const routes: Routes = [
   declarations: [
     StudentsIndexComponent,
     StudentFormComponent,
+    StudentEditComponent,
+    CourseSelectDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +47,8 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule,
+    MatOptionModule
   ],
   exports: [
     RouterModule

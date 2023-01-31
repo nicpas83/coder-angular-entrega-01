@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Student } from '../interfaces/student.interface';
 
-const base_url = environment.base_url;
+const base_url = environment.base_url_2;
 
 @Injectable({
   providedIn: 'root'
@@ -15,31 +15,25 @@ export class StudentsService {
 
 
   getAll(): Observable<Student[]> {
-    return this.http.get<Student[]>('assets/database-json/students.json')
+    return this.http.get<Student[]>(base_url + '/students');
   }
 
-  getById(){
-
+  getById(id: number): Observable<Student>{
+    return this.http.get<Student>(`${base_url}/students/${id}`);
   }
 
-  create(student: any): void{
-
-
+  create(formData: Student): Observable<Student>{
+    return this.http.post<Student>(base_url + '/students', formData);
   }
 
-  update(){
-
+  update(id: number, formData: Student): Observable<Student>{
+    return this.http.put<Student>(base_url + '/students/' + id, formData)
   }
 
-  delete(){
-
-    
+  delete(id: number): Observable<Student>{
+    return this.http.delete<Student>(base_url + '/students/' + id);
   }
 
-
-  getMaxId(items: Student[]): number{
-    return Math.max(...items.map( item => item.id ))
-  }
 
 
 }
