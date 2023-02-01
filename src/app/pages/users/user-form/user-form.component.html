@@ -1,0 +1,87 @@
+<h2 mat-dialog-title>Formulario Usuario</h2>
+<mat-dialog-content>
+  <form [formGroup]="userForm">
+
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="First Name" formControlName="first_name" />
+          <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">
+            First Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Last Name" formControlName="last_name" />
+          <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">
+            Last Name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" formControlName="email" />
+          <mat-error *ngIf="userForm.get('email')?.hasError('required')">
+            Email is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+          <mat-error *ngIf="userForm.get('password')?.hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput type="tel" placeholder="Telephone Number" formControlName="telephone_number" />
+          <mat-error *ngIf="userForm.get('telephone_number')?.hasError('required')">
+            Telephone Number is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Address" formControlName="address" />
+          <mat-error *ngIf="userForm.get('address')?.hasError('required')">
+            Address is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <mat-label>Rol</mat-label>
+          <mat-select formControlName="rol">
+            <mat-option value="Administrator">Administrator</mat-option>
+            <mat-option value="User">User</mat-option>
+          </mat-select>
+          <mat-error *ngIf="userForm.get('rol')?.hasError('required')">
+            Rol is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancelar</button>
+      <button mat-button [mat-dialog-close]="userForm.value" [disabled]="userForm.invalid">Guardar</button>
+    </div>
+  </form>
+</mat-dialog-content>

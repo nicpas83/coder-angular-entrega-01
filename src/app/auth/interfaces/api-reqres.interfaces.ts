@@ -5,7 +5,7 @@
 }
 */
 
-export interface LogginForm{
+export interface LogginForm {
   email: string;
   password: string;
   rol: string;
@@ -15,23 +15,31 @@ export interface LogginSuccessful {
   token: string;
 }
 
-//usuario simple
+//usuario interface API MOCKAPI
 export interface IUser {
-  id: number;
-  email: string;
   first_name: string;
   last_name: string;
-  avatar: string;
-  fullname?: string;
+  email: string;
+  password: string;
+  address: string;
+  telephone_number: string;
+  rol: string;
+  created_at?: number;
+  id?: string;
 }
 
-// respuesta completa del usuario
+// respuesta completa del usuario API REQRES - LOGIN
 export interface UserDto {
-  data:    IUser;
+  data: {
+    id: number;
+    email: string;
+    first_name: string;
+    last_name: string;
+    avatar: string;
+    fullname?: string;
+  };
   support: {
-    url:  string;
+    url: string;
     text: string;
   };
 }
-
-

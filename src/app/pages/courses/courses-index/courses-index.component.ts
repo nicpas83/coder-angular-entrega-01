@@ -1,8 +1,11 @@
-import { CreateCourseComponent } from './../create-course/create-course.component';
+import { DialogAlertComponent } from './../../../shared/components/dialog-alert/dialog-alert.component';
+import { InscriptionsService } from './../../../services/inscriptions.service';
+import { Inscriptions } from './../../../interfaces/student.interface';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CourseFormComponent } from './../course-form/course-form.component';
 
 // MATERIAL
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTableModule } from '@angular/material/table';
 
@@ -16,7 +19,15 @@ import { CoursesService } from 'src/app/services/courses.service';
   styleUrls: ['./courses-index.component.css'],
 })
 export class CoursesIndexComponent implements OnInit, OnDestroy {
-  public displayedColumns: string[] = ['id', 'nombre'];
+  displayedColumns: string[] = [
+    'id',
+    'name',
+    'teacher',
+    'class_duration',
+    'number_classes',
+    'count_inscriptions',
+    'actions',
+  ];
   dataSource = new MatTableDataSource<Course>();
 
   //observable para buscador de cursos
@@ -25,6 +36,7 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
 
   constructor(
     private coursesService: CoursesService,
+    private inscriptionsService: InscriptionsService,
     private dialog: MatDialog
   ) {}
 
@@ -33,7 +45,7 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
 
     //me subscribo al observable para realizar el filtrado del listado.
     this.search$
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(300), distinctUntilChanged())
       .subscribe((searchText) => {
         this.dataSource.filter = searchText.trim().toLowerCase();
       });
@@ -46,31 +58,51 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
   getAllCourses() {
     this.coursesService.getAll().subscribe({
       next: (resp: Course[]) => {
-        this.dataSource = new MatTableDataSource<Course>(
-          resp.map((course: Course) => {
-            return { ...course };
-          })
-        );
+        console.log(resp)
+        this.dataSource.data = resp;
       },
       error: (err) => console.log(err),
     });
   }
 
-  createCourse() {
+  openDialogCourseForm(id?: number) {
+    let title = id ? 'Editar curso' : 'Agregar curso';
+    const dialogRef = this.dialog.open(CourseFormComponent, {
+      data: {
+        title: title,
+        course_id: id,
+      },
+    });
 
-      this.dialog.open(CreateCourseComponent, {
-        data: {
-          title: 'Agregar nuevo curso',
-          course: undefined
-        }
-      })
-
+    dialogRef.afterClosed().subscribe((data) => {
+      if (id) {
+        this.coursesService
+          .update(id, data)
+          .subscribe(() => this.getAllCourses());
+      } else {
+        if (data)
+          this.coursesService
+            .create(data)
+            .subscribe(() => this.getAllCourses());
+      }
+    });
   }
 
-  editCourse(id: number){
-
+  deleteCourse(id: number) {
+    //validar que no tenga inscripciones previas
+    this.inscriptionsService.getInscriptionsByCourseId(id).subscribe((data) => {
+      if (data.length > 0) {
+        this.dialog.open(DialogAlertComponent, {
+          data: {
+            message:
+              'No puedes eliminar el curso porque ya tiene inscripciones',
+          },
+        });
+      } else {
+        this.coursesService
+          .delete(id)
+          .subscribe(() => this.getAllCourses());
+      }
+    });
   }
-
-
-  deleteCourse(id: number) {}
 }

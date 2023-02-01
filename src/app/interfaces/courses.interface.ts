@@ -1,6 +1,10 @@
 export interface Course
 {
-  name: string,
   id?: number;
-  createdAt?: Date
+  name: string;
+  teacher: string;
+  class_duration: number;
+  number_classes: number;
+  createdAt?: Date;
+  count_inscriptions?: number;
 }

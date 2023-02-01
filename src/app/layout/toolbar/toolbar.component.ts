@@ -1,4 +1,4 @@
-import { IUser } from './../../auth/interfaces/api-reqres.interfaces';
+import { User } from 'src/app/models/user.model';
 import { AuthService } from '../../auth/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
@@ -12,7 +12,7 @@ export class ToolbarComponent implements OnInit {
   username: string | undefined = undefined;
   rol: string | undefined = undefined;
 
-  public user: IUser | null = null;
+  public user: User | null = null;
 
   constructor(
     private authService: AuthService,

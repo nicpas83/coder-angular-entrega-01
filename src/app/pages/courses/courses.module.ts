@@ -11,7 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
 
 import { CoursesIndexComponent } from './courses-index/courses-index.component';
-import { CreateCourseComponent } from './create-course/create-course.component';
+import { CourseFormComponent } from './course-form/course-form.component';
+
 
 
 const routes: Routes = [
@@ -24,7 +25,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     CoursesIndexComponent,
-    CreateCourseComponent
+    CourseFormComponent,
   ],
   imports: [
     CommonModule,

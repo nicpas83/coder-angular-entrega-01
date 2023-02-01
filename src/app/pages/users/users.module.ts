@@ -1,3 +1,4 @@
+import { MatSelectModule } from '@angular/material/select';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -12,6 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 
 import { UsersIndexComponent } from './users-index/users-index.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 const routes: Routes = [
   {
@@ -22,7 +24,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    UsersIndexComponent
+    UsersIndexComponent,
+    UserFormComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSelectModule
   ],
   exports: [RouterModule]
 })

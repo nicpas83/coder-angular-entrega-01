@@ -16,7 +16,25 @@ export class UsersService {
     private readonly http: HttpClient
   ) { }
 
-  getUsers(): Observable<IUser[]>{
-    return this.http.get<IUser[]>(base_url + 'users')
+  getAll(): Observable<IUser[]>{
+    return this.http.get<IUser[]>(base_url + '/users')
   }
+
+  getById(id: number): Observable<IUser>{
+    return this.http.get<IUser>(`${base_url}/users/${id}`);
+  }
+
+  create(formData: IUser): Observable<IUser>{
+    return this.http.post<IUser>(base_url + '/users', formData);
+  }
+
+  update(id: number, formData: IUser): Observable<IUser>{
+    return this.http.put<IUser>(base_url + '/users/' + id, formData)
+  }
+
+  delete(id: number): Observable<IUser>{
+    return this.http.delete<IUser>(base_url + '/users/' + id);
+  }
+
+
 }
