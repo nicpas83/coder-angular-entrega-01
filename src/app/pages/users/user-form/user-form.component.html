@@ -1,66 +1,47 @@
-<h2 mat-dialog-title>Formulario Usuario</h2>
+<h2 mat-dialog-title>{{ data.title }}</h2>
 <mat-dialog-content>
   <form [formGroup]="userForm">
-
-
     <div class="row">
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="First Name" formControlName="first_name" />
-          <mat-error *ngIf="userForm.get('first_name')?.hasError('required')">
-            First Name is required
-          </mat-error>
+          <input matInput placeholder="Nombre" formControlName="first_name" />
+          <mat-error>{{ getErrorMessage('first_name') }}</mat-error>
         </mat-form-field>
       </div>
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="Last Name" formControlName="last_name" />
-          <mat-error *ngIf="userForm.get('last_name')?.hasError('required')">
-            Last Name is required
-          </mat-error>
+          <input matInput placeholder="Apellido" formControlName="last_name" />
+          <mat-error>{{ getErrorMessage('last_name') }}</mat-error>
         </mat-form-field>
       </div>
     </div>
 
-
     <div class="row">
-
       <div class="col-md-6">
         <mat-form-field>
           <input matInput type="email" placeholder="Email" formControlName="email" />
-          <mat-error *ngIf="userForm.get('email')?.hasError('required')">
-            Email is required
-          </mat-error>
+          <mat-error>{{ getErrorMessage('email') }}</mat-error>
         </mat-form-field>
       </div>
-
       <div class="col-md-6">
         <mat-form-field>
           <input matInput type="password" placeholder="Password" formControlName="password" />
-          <mat-error *ngIf="userForm.get('password')?.hasError('required')">
-            Password is required
-          </mat-error>
+          <mat-error>{{ getErrorMessage('password') }}</mat-error>
         </mat-form-field>
       </div>
     </div>
 
     <div class="row">
-
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput type="tel" placeholder="Telephone Number" formControlName="telephone_number" />
-          <mat-error *ngIf="userForm.get('telephone_number')?.hasError('required')">
-            Telephone Number is required
-          </mat-error>
+          <input matInput type="tel" placeholder="Teléfono" formControlName="telephone_number" />
+          <mat-error>{{ getErrorMessage('telephone_number') }}</mat-error>
         </mat-form-field>
       </div>
-
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="Address" formControlName="address" />
-          <mat-error *ngIf="userForm.get('address')?.hasError('required')">
-            Address is required
-          </mat-error>
+          <input matInput placeholder="Dirección" formControlName="address" />
+          <mat-error>{{ getErrorMessage('address') }}</mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -70,12 +51,10 @@
         <mat-form-field>
           <mat-label>Rol</mat-label>
           <mat-select formControlName="rol">
-            <mat-option value="Administrator">Administrator</mat-option>
-            <mat-option value="User">User</mat-option>
+            <mat-option value="Administrator">Administrador</mat-option>
+            <mat-option value="User">Usuario</mat-option>
           </mat-select>
-          <mat-error *ngIf="userForm.get('rol')?.hasError('required')">
-            Rol is required
-          </mat-error>
+          <mat-error>{{ getErrorMessage('rol') }}</mat-error>
         </mat-form-field>
       </div>
     </div>

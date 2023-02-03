@@ -58,7 +58,6 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
   getAllCourses() {
     this.coursesService.getAll().subscribe({
       next: (resp: Course[]) => {
-        console.log(resp)
         this.dataSource.data = resp;
       },
       error: (err) => console.log(err),

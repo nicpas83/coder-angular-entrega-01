@@ -35,4 +35,18 @@ export class StudentFormComponent {
      this.dialogRef.close(this.studentForm.value)
   }
 
+  getErrorMessage(controlName: string){
+    const control = this.studentForm.get(controlName);
+
+    if(control?.hasError('required')){
+      return 'El campo es requerido'
+    }
+
+    if(control?.hasError('minlength')){
+      return 'Debe tener al menos 3 caracteres'
+    }
+
+    return false;
+  }
+
 }

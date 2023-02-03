@@ -2,6 +2,7 @@ import { Course } from 'src/app/interfaces/courses.interface';
 import {
   StudentInscription,
   Inscriptions,
+  Student,
 } from './../interfaces/student.interface';
 import { filter, forkJoin, map, Observable, mergeMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -16,6 +17,27 @@ const base_url_2 = environment.base_url_2;
 })
 export class InscriptionsService {
   constructor(private http: HttpClient) {}
+
+  // Obtengo las inscripciones y les agrego el nombre del estudiante y el del curso
+  getAllStudentsInscriptions(): Observable<Inscriptions[]> {
+    return forkJoin([
+      this.http.get<Inscriptions[]>(base_url_2 + '/inscriptions'),
+      this.http.get<Student[]>(base_url_2 + '/students'),
+      this.http.get<Course[]>(base_url_1 + '/courses'),
+    ]).pipe(
+      map(([inscriptions, students, courses]) => {
+        return inscriptions.map((inscription) => {
+          const student = students.find((s) => s.id == inscription.student_id);
+          const course = courses.find((c) => c.id == inscription.course_id);
+          return {
+            ...inscription,
+            student_name: student?.first_name + ' ' + student?.last_name,
+            course_name: course?.name
+          };
+        });
+      })
+    );
+  }
 
   // Obtengo todas las inscripciones y filtro las del estudiante.
   getInscriptionsByStudentId(
@@ -36,6 +58,7 @@ export class InscriptionsService {
     );
   }
 
+  // Obtengo todas las inscripciones y filtro las del curso.
   getInscriptionsByCourseId(
     course_id: number
   ): Observable<StudentInscription[]> {

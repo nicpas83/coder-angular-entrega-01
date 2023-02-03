@@ -1,3 +1,4 @@
+import { MatTableModule } from '@angular/material/table';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -18,6 +19,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     SharedModule,
+    MatTableModule
   ],
   exports: [RouterModule]
 })

@@ -20,4 +20,6 @@ export interface Inscriptions{
   created_at?: Date;
   student_id: number;
   course_id: number;
+  student_name?: string;
+  course_name?: string;
 }

@@ -26,7 +26,6 @@
                                   <div class="mb-3">
                                       <label class="small mb-1" for="inputPassword">Rol</label>
                                       <select class="form-control" formControlName="rol">
-                                        <option></option>
                                         <option *ngFor="let rol of rolTypes" [value]="rol">{{ rol }}</option>
                                       </select>
                                       <small *ngIf="loginForm.get('rol')?.touched && loginForm.get('rol')?.invalid" class="text-danger">Debe seleccionar un Rol para ingresar.</small>
