@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.component';
+import { AccessDirective } from './directives/access.directive';
 
 
 
 @NgModule({
   declarations: [
-    DialogAlertComponent
+    DialogAlertComponent,
+    AccessDirective
   ],
   imports: [
     CommonModule,
@@ -21,6 +23,7 @@ import { DialogAlertComponent } from './components/dialog-alert/dialog-alert.com
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    AccessDirective
   ]
 })
 export class SharedModule { }

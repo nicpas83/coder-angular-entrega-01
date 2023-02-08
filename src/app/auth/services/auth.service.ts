@@ -21,6 +21,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
+  private _rol: string = '';
+
+  get rol(): string {
+    return this._rol;
+  }
+
+  set rol(value: string) {
+    this._rol = value;
+  }
+
+
   login(userLoggin: LogginForm): Observable<User> {
     //convierto obj porque viene con el campo rol desde el form.
     const { email, password } = userLoggin;
@@ -64,6 +75,8 @@ export class AuthService {
 
   setUser(user: User) {
     //emito el nuevo valor del usuario.
+    console.log(user.rol)
+    this.rol = user.rol;
     this.user.next(user);
   }
 

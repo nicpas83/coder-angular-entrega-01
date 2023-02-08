@@ -1,3 +1,4 @@
+import { RoleGuard } from './../guards/role.guard';
 import { PagesComponent } from './pages.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,8 +14,17 @@ const routes: Routes = [
     children: [
       {
         path: 'usuarios',
+        canActivate: [RoleGuard],
         loadChildren: () =>
           import('./users/users.module').then((m) => m.UsersModule),
+      },
+      {
+        path: 'inscripciones',
+        canActivate: [RoleGuard],
+        loadChildren: () =>
+          import('./inscriptions/inscriptions.module').then(
+            (m) => m.InscriptionsModule
+          ),
       },
       {
         path: 'alumnos',
@@ -26,13 +36,7 @@ const routes: Routes = [
         loadChildren: () =>
           import('./courses/courses.module').then((m) => m.CoursesModule),
       },
-      {
-        path: 'inscripciones',
-        loadChildren: () =>
-          import('./inscriptions/inscriptions.module').then(
-            (m) => m.InscriptionsModule
-          ),
-      },
+
     ]
   },
 

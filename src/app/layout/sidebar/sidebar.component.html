@@ -6,7 +6,7 @@
         <div class="nav-link-icon"><i data-feather="home"></i></div>
         Inicio
       </a>
-      <a class="nav-link" routerLink="usuarios">
+      <a class="nav-link" routerLink="usuarios" [appAccess]="['Administrador']">
         <div class="nav-link-icon"><i data-feather="list"></i></div>
         Usuarios
       </a>
@@ -18,7 +18,7 @@
         <div class="nav-link-icon"><i data-feather="list"></i></div>
         Cursos
       </a>
-      <a class="nav-link" routerLink="inscripciones">
+      <a class="nav-link" routerLink="inscripciones" [appAccess]="['Administrador']">
         <div class="nav-link-icon"><i data-feather="list"></i></div>
         Inscripciones
       </a>
