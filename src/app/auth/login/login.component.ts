@@ -43,7 +43,7 @@ export class LoginComponent {
     this.authService.login(this.loginForm.value).subscribe({
       next: () => {
         this.loading = false;
-        this.router.navigate(['']);
+        this.router.navigate(['/app/inicio']);
       },
       error: (error) => {
         console.log(error);

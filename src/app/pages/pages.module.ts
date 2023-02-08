@@ -13,6 +13,10 @@ const routes: Routes = [
     component: PagesComponent,
     children: [
       {
+        path: 'inicio',
+        component: HomeComponent
+      },
+      {
         path: 'usuarios',
         canActivate: [RoleGuard],
         loadChildren: () =>

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'app',
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/pages.module').then( m => m.PagesModule )
   },
@@ -13,7 +13,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./auth/auth.module').then( m => m.AuthModule )
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '/app/inicio' }
 ];
 
 @NgModule({

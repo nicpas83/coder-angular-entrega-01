@@ -75,7 +75,6 @@ export class AuthService {
 
   setUser(user: User) {
     //emito el nuevo valor del usuario.
-    console.log(user.rol)
     this.rol = user.rol;
     this.user.next(user);
   }
