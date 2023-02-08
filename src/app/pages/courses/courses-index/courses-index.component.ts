@@ -1,3 +1,4 @@
+import { selectCourseState } from './../store/course.selectors';
 import { DialogAlertComponent } from './../../../shared/components/dialog-alert/dialog-alert.component';
 import { InscriptionsService } from './../../../services/inscriptions.service';
 import { Inscriptions } from './../../../interfaces/student.interface';
@@ -12,6 +13,9 @@ import { MatTableModule } from '@angular/material/table';
 import { debounceTime, distinctUntilChanged, fromEvent, Subject } from 'rxjs';
 import { Course } from 'src/app/interfaces/courses.interface';
 import { CoursesService } from 'src/app/services/courses.service';
+
+import { Store } from '@ngrx/store';
+import { loadCourses } from '../store/course.actions';
 
 @Component({
   selector: 'app-courses-index',
@@ -37,11 +41,18 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
   constructor(
     private coursesService: CoursesService,
     private inscriptionsService: InscriptionsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private store: Store
   ) {}
 
   ngOnInit(): void {
-    this.getAllCourses();
+    // this.getAllCourses();  ANTES DE APLICAR REDUX.
+
+    this.store.dispatch(loadCourses())
+
+    this.store.select(selectCourseState).subscribe(courses => {
+      this.dataSource.data = courses.data
+    })
 
     //me subscribo al observable para realizar el filtrado del listado.
     this.search$
@@ -55,14 +66,15 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
     this.search$.unsubscribe();
   }
 
-  getAllCourses() {
-    this.coursesService.getAll().subscribe({
-      next: (resp: Course[]) => {
-        this.dataSource.data = resp;
-      },
-      error: (err) => console.log(err),
-    });
-  }
+  // ANTES DE APLICAR REDUX
+  // getAllCourses() {
+  //   this.coursesService.getAll().subscribe({
+  //     next: (resp: Course[]) => {
+  //       this.dataSource.data = resp;
+  //     },
+  //     error: (err) => console.log(err),
+  //   });
+  // }
 
   openDialogCourseForm(id?: number) {
     let title = id ? 'Editar curso' : 'Agregar curso';
@@ -77,12 +89,12 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
       if (id) {
         this.coursesService
           .update(id, data)
-          .subscribe(() => this.getAllCourses());
+          .subscribe(() => this.store.dispatch(loadCourses()));
       } else {
         if (data)
           this.coursesService
             .create(data)
-            .subscribe(() => this.getAllCourses());
+            .subscribe(() => this.store.dispatch(loadCourses()));
       }
     });
   }
@@ -100,7 +112,7 @@ export class CoursesIndexComponent implements OnInit, OnDestroy {
       } else {
         this.coursesService
           .delete(id)
-          .subscribe(() => this.getAllCourses());
+          .subscribe(() => this.store.dispatch(loadCourses()));
       }
     });
   }

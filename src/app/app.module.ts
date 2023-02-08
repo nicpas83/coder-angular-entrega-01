@@ -1,3 +1,4 @@
+import { CoursesStoreModule } from './pages/courses/courses-store.module';
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -26,7 +27,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     PagesModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    CoursesStoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
